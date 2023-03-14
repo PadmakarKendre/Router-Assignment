@@ -1,7 +1,12 @@
 import React, { lazy, Suspense } from "react";
 import Router404 from "./404";
 
-import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 const Dashboard = lazy(() => import("./dashboard"));
 const Auth = lazy(() => import("./Auth"));
 const DashboardChild = lazy(() => import("./dashboard-child"));
@@ -12,7 +17,7 @@ const router = createBrowserRouter([
     name: "Home",
     element: (
       <Suspense fallback={<>...</>}>
-        <DashboardChild title="Home" />
+        <Navigate to="/dashboard" replace={true} />
       </Suspense>
     ),
   },
