@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { FaDashcube, FaProjectDiagram } from "react-icons/fa";
 
 const Dashboard = () => {
   const data = [
@@ -78,7 +79,15 @@ const Dashboard = () => {
       fontWeight: isActive ? "bold" : "normal",
     };
   };
-  const iconList = [{ dashboard: "1" }];
+  const iconsList = [{ dashboard: FaDashcube, projects: FaProjectDiagram }];
+  const renderIcon = (icon, index) => {
+    const Icon = icon;
+    return (
+      <span className="y" key={index}>
+        <Icon />
+      </span>
+    );
+  };
   return (
     <div className="container">
       <div className="row">
@@ -88,7 +97,11 @@ const Dashboard = () => {
               return item.children ? (
                 <div className="list-group-item">
                   <li className="list-group-item" key={item.path}>
-                    <span>{item.icon && iconList[item.icon]}</span>
+                    <span>
+                      {iconsList.map((icon, index) =>
+                        renderIcon(icon[item.icon], index)
+                      )}
+                    </span>
                     {item.name}
                   </li>
                   <ul>

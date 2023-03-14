@@ -9,48 +9,12 @@ const DashboardChild = lazy(() => import("./dashboard-child"));
 const router = createBrowserRouter([
   {
     path: "/",
-    locale: "dashboard",
-    name: "Dashboard",
-    icon: "dashboard",
+    name: "Home",
     element: (
       <Suspense fallback={<>...</>}>
-        <Dashboard title="Dashboard" />
+        <DashboardChild title="Home" />
       </Suspense>
     ),
-    exact: true, // This route will only work for /dashboard. For dashboard/analysis or other this component will not be rendered
-    component: "pages/dashboard",
-    children: [
-      {
-        path: "/dashboard/analysis",
-        locale: "dashboard.analysis",
-        name: "analysis",
-        element: <Auth role="admin" title="analysis" />,
-        exact: true,
-        accessTO: ["admin"], // Allow only admins to view this menu and access this page
-      },
-      {
-        path: "/dashboard/monitor",
-        locale: "dashboard.monitor",
-        element: (
-          <Suspense fallback={<>...</>}>
-            <DashboardChild title="Monitor" />
-          </Suspense>
-        ),
-        name: "monitor",
-        exact: true,
-      },
-      {
-        path: "/dashboard/workplace",
-        locale: "dashboard.workplace",
-        element: (
-          <Suspense fallback={<>...</>}>
-            <DashboardChild title="Workplace" />
-          </Suspense>
-        ),
-        name: "workplace",
-        exact: true,
-      },
-    ],
   },
   {
     name: "Login",
@@ -165,11 +129,10 @@ const router = createBrowserRouter([
     element: <Router404 />,
   },
 ]);
-export default function App() {
-  return (
-    <>
-      <RouterProvider router={router} />
-      <Outlet />
-    </>
-  );
-}
+const App = () => (
+  <>
+    <RouterProvider router={router} />
+    <Outlet />
+  </>
+);
+export default App;
